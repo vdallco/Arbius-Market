@@ -1,0 +1,133 @@
+<html>
+
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"
+        type="application/javascript"></script>
+
+
+<script src="/aius/bundle.js" type="application/javascript"></script>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<title>Arbius AIUS marketplace</title>
+<body style="margin:25px;padding:25px;background-color:#424242;color:white;">
+<h3 class="row">
+<div class="col s6 m6">AIUS marketplace</div>
+<div class="col s4 m4">
+<div class="switch right" id="mainOrTest">
+    <label>
+      Mainnet
+      <input type="checkbox" id="testnetBox">
+      <span class="lever"></span>
+      Testnet
+    </label>
+  </div></div>
+<button class="right btn col s2 m2" id="connectWallet">Connect</button></h2>
+<br />
+
+<div class="row">
+  <div class="col s12 m12">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">How does it work</span>
+        <ul class="collection blue-grey darken-2" style="border-style:none;">
+          <li class="collection-item blue-grey darken-2" style="border-style:none;">Miners can deposit rewards in ETH or ERC-20 tokens to incentivize AIUS holders to deposit to specific validators.</li>
+          <li class="collection-item blue-grey darken-3">AIUS holders looking to swap to ETH or ERC-20 tokens may deposit directly to incentivized validators to earn rewards.</li>
+        </ul>
+        <p><em>Each bribe has a rate (per 1 AIUS) set by the depositor.</em><br /><br />
+           <em><strong>Please note</strong>: You must deposit through this dapp/contract to claim rewards. There are no retroactive rewards.</em>
+      </div>
+      <div class="card-action">
+        <a id="seeBribes" href="#bribesTbl" class="">See <span id="bribeCount"></span> bribes</a>
+        <a id="seeDeposit" href="#depositBribe" class="">Incentivize a validator</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 m12">
+    <div class="card transparent">
+      <div class="card-content white-text">
+        <span class="card-title">Deposit new bribe</span>
+
+       <div class="row">
+         <div class="col s6 m6">
+          <p>Validator address</p> <input type="text" class="white-text" id="validatorAddr"></input>
+         </div>
+         <div class="col s6 m6">
+           <p>Reward token (ETH default)</p> <input id="rewardToken" class="white-text" type="text" value="0x0000000000000000000000000000000000000000"></input>
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="col s2 m2">
+           <p>Total reward tokens</p> <input id="totalTokens" type="number" class="white-text" style="font-color:white;"></input>
+         </div>
+         <div class="col s2 m2">
+          <p>Tokens per 1 AIUS</p> <input id="tokensPerAIUS" type="number" class="white-text" style="font-color:white;"></input>
+         </div>
+       </div>
+     </div>
+     <div class="card-action">
+       <div class="progress" id="depositLoading" style="display:none;">
+          <div class="indeterminate"></div>
+       </div>
+       <a href="#" id="depositBribe">Deposit bribe</a>
+     </div>
+   </div>
+  </div>
+ </div>
+<br />
+<h4>Bribes</h4>
+<table id="bribesTbl">
+<tbody>
+<tr>
+<td><strong>Validator</strong></td>
+<td><strong>Reward token</strong></td>
+<td><strong>Tokens per AIUS</strong></td>
+<td><strong>Tokens Remaining</strong></td>
+<td><strong>Expiration</strong></td>
+<td><strong>Deposit and claim</strong></td>
+</tr>
+<tr>
+</tr>
+<tr>
+</tr>
+</tbody>
+</table>
+
+<div id="depositClaimModal" class="black modal bottom-sheet">
+    <div class="modal-content">
+      <h4 id="modalHeader">Deposit AIUS to validator to claim rewards</h4>
+      <div class="row" id="modalRow">
+      <div class="col s4 m4">
+      <p>Note: you are depositing AIUS to an incentivized validator to claim rewards via the Bribe contract.</p>
+      <br />
+      <p><b>Depositing AIUS to <span id="incentivizedValidator">...</span></b></p>
+      </div>
+      <div class="col s4 m4">
+        <p class="right">Please enter the amount of AIUS you would like to deposit: </p>
+      </div>
+      <div class="col s2 m2">
+        <input type="number" class="white-text" value="0.0" id="aiusDepositAmt"></input>
+      </div>
+      </div>
+    </div>
+    <div class="modal-footer black" id="modalFooter">
+      <div class="progress" id="claimLoading" style="display:none;">
+          <div class="indeterminate"></div>
+       </div>
+      <a href="#!" id="approveAIUS" class="green waves-effect waves-green btn-flat">Approve</a>
+      <a href="#!" style="display:none;" id="confirmAIUS" class="green waves-effect waves-green btn-flat">Deposit</a>
+      <a href="#!" id="cancelClaim" class="white modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
+</body>
+</html>
